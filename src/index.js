@@ -1,5 +1,3 @@
-import './style.css';
-import { loadImage, loadTagAreas } from './scripts/init';
+import App from './scripts/App';
 
-loadImage();
-loadTagAreas();
+App();

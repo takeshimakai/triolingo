@@ -24,6 +24,9 @@ header {
 }
 
 #instruction-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 150px;
     width: 700px;
     background-color: rgb(194, 233, 247);
@@ -44,7 +47,6 @@ img {
 
 #tag-container {
     position: absolute;
-    opacity: 50%;
     width: 90%;
     height: 100%;
     top: 0;
@@ -56,7 +58,18 @@ img {
 }
 
 .tag {
-    opacity: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 25%;
     height: 50%;
+}
+
+.clicked {
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    background-color: lightgreen;
+    opacity: 90%;
+    pointer-events: none;
 }

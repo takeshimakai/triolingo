@@ -15,6 +15,7 @@ const loadTagAreas = () => {
     for (let i = 0; i < 8; i++) {
         const tag = document.createElement('div');
         tag.classList.add('tag');
+        tag.id = i;
         tagContainer.appendChild(tag);
     }
 
