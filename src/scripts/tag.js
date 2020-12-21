@@ -1,8 +1,19 @@
-const selected = [];
+let selected = [];
 
 const getSelected = () => selected;
 
-const addToSelected = (e) => selected.push(e.target.id);
+const clearSelected = () => {
+    selected = [];
+};
+
+const addToSelected = (e) => {
+    const index = selected.findIndex((element) => element === e.target.id);
+    if (index === -1) {
+        selected.push(e.target.id);
+    } else {
+        selected.splice(index, 1);
+    }
+};
 
 const showClicked = (e) => {
     if (!e.target.hasChildNodes()) {
@@ -14,4 +25,12 @@ const showClicked = (e) => {
     }
 };
 
-export { getSelected, addToSelected, showClicked };
+const removeAllCircles = () => document.querySelectorAll('.clicked').forEach((circle) => circle.remove());
+
+export {
+    getSelected,
+    clearSelected,
+    addToSelected,
+    showClicked,
+    removeAllCircles,
+};

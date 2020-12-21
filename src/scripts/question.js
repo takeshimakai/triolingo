@@ -14,13 +14,20 @@ const questions = [
 const loadQuestion = () => {
     const index = questions.findIndex((question) => question.asked === false);
 
-    if (index !== -1) {
-        const questionElement = document.querySelector('#question');
-        questionElement.textContent = questions[index].question;
-        questions[index].asked = true;
+    if (index === -1) {
+        return null;
     }
+
+    const questionElement = document.querySelector('#question');
+    questionElement.textContent = questions[index].question;
+    questions[index].asked = true;
+    return questions[index].id;
 };
 
 const allQuestionsAsked = () => questions.every((question) => question.asked === true);
 
-export { loadQuestion, allQuestionsAsked };
+const resetAskedStatus = () => questions.forEach((question) => {
+    question.asked = false;
+});
+
+export { loadQuestion, allQuestionsAsked, resetAskedStatus };
