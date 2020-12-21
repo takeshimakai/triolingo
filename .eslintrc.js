@@ -12,7 +12,9 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    indent: ['error', 4],
-    'no-plusplus': ['error', { 'allowForLoopAfterthoughts': true }]
+    indent: ['error', 4, { 'SwitchCase': 1 }],
+    'no-plusplus': ['error', {'allowForLoopAfterthoughts': true }],
+    'no-param-reassign': ['error', { 'props': false }],
+    'object-curly-newline': ['error', { 'ImportDeclaration': 'never' }]
   },
 };
