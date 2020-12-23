@@ -21,7 +21,7 @@ const createResultForm = (result) => {
             resultDisplay.textContent = "Félicitations! Vous êtes fraçais(e)! Vous n'avez fait aucune erreur!";
             break;
         case (result > 0 && result < 3):
-            resultDisplay.textContent = `Nice! You only made ${result} mistakes!`;
+            resultDisplay.textContent = `Nice! You only made ${result} mistake(s)!`;
             break;
         case (result >= 3):
             resultDisplay.textContent = `You made ${result} mistakes! Need more practice!`;

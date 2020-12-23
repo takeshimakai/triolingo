@@ -1,11 +1,11 @@
 import '../style.css';
 import { loadImage, loadTagAreas } from './init';
 import { getSelected, clearSelected, addToSelected, showClicked, removeAllCircles } from './tag';
-import { loadQuestion, allQuestionsAsked } from './question';
+import { loadQuestion, allQuestionsAsked, resetAskedStatus } from './question';
 import validateAnswer from './validateAnswer';
 import { submitResult, createResultForm } from './submitResult';
 import answers from './testAnswers';
-import { getLeaderboard, addToLeaderboard, renderLeaderboard } from './testLeaderboard';
+import { renderLeaderboard } from './testLeaderboard';
 
 const App = () => {
     loadImage();
@@ -39,12 +39,14 @@ const App = () => {
                 const numOfMistakesCopy = numOfMistakes;
                 numOfMistakes = 0;
                 createResultForm(numOfMistakesCopy);
+                resetAskedStatus();
                 const form = document.querySelector('form');
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
                     submitResult(numOfMistakesCopy);
-                    e.target.remove();
                     renderLeaderboard();
+                    questionId = loadQuestion();
+                    e.target.remove();
                 });
                 console.log('Game Over');
             } else {
