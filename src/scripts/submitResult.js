@@ -1,3 +1,11 @@
+import { addToLeaderboard } from './testLeaderboard';
+
+// Replace below with call to DB
+const submitResult = (result) => {
+    const name = document.querySelector('#name').value;
+    addToLeaderboard(name, result);
+};
+
 const createResultForm = (result) => {
     const form = document.createElement('form');
 
@@ -31,4 +39,4 @@ const createResultForm = (result) => {
     document.body.appendChild(form);
 };
 
-export { createResultForm };
+export { submitResult, createResultForm };

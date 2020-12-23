@@ -25,10 +25,27 @@ form {
     bottom: 0;
 }
 
+#content-container {
+    display: flex;
+}
+
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 150px;
+    background-color: antiquewhite;
+}
+
+.leader-container {
+    margin: 10px;
 }
 
 header {

@@ -3,12 +3,14 @@ import { loadImage, loadTagAreas } from './init';
 import { getSelected, clearSelected, addToSelected, showClicked, removeAllCircles } from './tag';
 import { loadQuestion, allQuestionsAsked } from './question';
 import validateAnswer from './validateAnswer';
-import { createResultForm } from './submitScore';
+import { submitResult, createResultForm } from './submitResult';
 import answers from './testAnswers';
+import { getLeaderboard, addToLeaderboard, renderLeaderboard } from './testLeaderboard';
 
 const App = () => {
     loadImage();
     loadTagAreas();
+    renderLeaderboard();
 
     let questionId = loadQuestion();
     let numOfMistakes = 0;
@@ -23,12 +25,10 @@ const App = () => {
 
     const answerBtn = document.querySelector('#answer-btn');
     answerBtn.addEventListener('click', () => {
-        const selected = getSelected();
-
         // Replace below line with backend
         const { answer } = answers.find(({ id }) => id === questionId);
 
-        const answerIsCorrect = validateAnswer(answer, selected);
+        const answerIsCorrect = validateAnswer(answer, getSelected());
 
         if (answerIsCorrect) {
             removeAllCircles();
@@ -36,7 +36,16 @@ const App = () => {
             const isGameOver = allQuestionsAsked();
 
             if (isGameOver) {
-                createResultForm(numOfMistakes);
+                const numOfMistakesCopy = numOfMistakes;
+                numOfMistakes = 0;
+                createResultForm(numOfMistakesCopy);
+                const form = document.querySelector('form');
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    submitResult(numOfMistakesCopy);
+                    e.target.remove();
+                    renderLeaderboard();
+                });
                 console.log('Game Over');
             } else {
                 questionId = loadQuestion();
@@ -45,9 +54,6 @@ const App = () => {
             console.log('Keep trying!');
             numOfMistakes += 1;
         }
-
-        console.log(numOfMistakes);
-        return numOfMistakes;
     });
 };
 
