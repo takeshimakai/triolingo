@@ -11,7 +11,7 @@ body {
     height: 100vh;
 }
 
-form {
+form, #announcement-box {
     position: absolute;
     height: 300px;
     width: 300px;

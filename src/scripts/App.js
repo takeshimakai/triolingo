@@ -6,6 +6,7 @@ import validateAnswer from './validateAnswer';
 import { submitResult, createResultForm } from './submitResult';
 import answers from './testAnswers';
 import { renderLeaderboard } from './testLeaderboard';
+import announcementBox from './announcementBox';
 
 const App = () => {
     loadImage();
@@ -14,6 +15,7 @@ const App = () => {
 
     let questionId = loadQuestion();
     let numOfMistakes = 0;
+    let isGameOver = false;
 
     const tags = document.querySelectorAll('.tag');
     tags.forEach((tag) => {
@@ -33,9 +35,10 @@ const App = () => {
         if (answerIsCorrect) {
             removeAllCircles();
             clearSelected();
-            const isGameOver = allQuestionsAsked();
+            isGameOver = allQuestionsAsked();
 
             if (isGameOver) {
+                isGameOver = false;
                 const numOfMistakesCopy = numOfMistakes;
                 numOfMistakes = 0;
                 createResultForm(numOfMistakesCopy);
@@ -48,12 +51,13 @@ const App = () => {
                     questionId = loadQuestion();
                     e.target.remove();
                 });
-                console.log('Game Over');
+                announcementBox('Game over');
             } else {
+                announcementBox('Correct!');
                 questionId = loadQuestion();
             }
         } else {
-            console.log('Keep trying!');
+            announcementBox('Wrong answer! Keep trying!');
             numOfMistakes += 1;
         }
     });
