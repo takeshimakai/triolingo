@@ -1,8 +1,4 @@
-const leaderboard = [];
-
-const getLeaderboard = () => leaderboard;
-
-const addToLeaderboard = (name, result) => {
+const addToLeaderboard = (leaderboard, name, result) => {
     if (leaderboard.length === 0) {
         leaderboard.push({ rank: 1, name, result });
     } else {
@@ -26,7 +22,7 @@ const addToLeaderboard = (name, result) => {
     }
 };
 
-const renderLeaderboard = () => {
+const renderLeaderboard = (leaderboard) => {
     const leaderboardContent = document.querySelector('#leaderboard-content');
     leaderboardContent.innerHTML = '';
 
@@ -44,4 +40,4 @@ const renderLeaderboard = () => {
     });
 };
 
-export { getLeaderboard, addToLeaderboard, renderLeaderboard };
+export { addToLeaderboard, renderLeaderboard };

@@ -7,15 +7,18 @@ import { submitResult, createResultForm } from './submitResult';
 import answers from './testAnswers';
 import { renderLeaderboard } from './testLeaderboard';
 import announcementBox from './announcementBox';
+import { getLeaderboard } from '../firebase/firestore';
 
-const App = () => {
+const App = async () => {
     loadImage();
     loadTagAreas();
-    renderLeaderboard();
 
+    const leaderboard = await getLeaderboard();
     let questionId = loadQuestion();
     let numOfMistakes = 0;
     let isGameOver = false;
+
+    renderLeaderboard(leaderboard);
 
     const tags = document.querySelectorAll('.tag');
     tags.forEach((tag) => {
