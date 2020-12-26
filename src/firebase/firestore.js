@@ -1,13 +1,17 @@
 import { firestore } from './initFirebase';
 
+const leaderboardCollection = firestore.collection('leaderboard');
+
 const getLeaderboard = async () => {
     const leaderboard = [];
-    const docs = await firestore.collection('leaderboard').get();
+    const docs = await leaderboardCollection.get();
     docs.forEach((doc) => {
-        const { rank, name, result } = doc.data();
-        leaderboard.push({ rank, name, result });
+        const { name, result } = doc.data();
+        leaderboard.push({ name, result });
     });
     return leaderboard;
 };
 
-export { getLeaderboard };
+const addToLeaderboard = (name, result) => leaderboardCollection.add({ name, result });
+
+export { getLeaderboard, addToLeaderboard };

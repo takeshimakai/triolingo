@@ -3,11 +3,11 @@ import { loadImage, loadTagAreas } from './init';
 import { getSelected, clearSelected, addToSelected, showClicked, removeAllCircles } from './tag';
 import { loadQuestion, allQuestionsAsked, resetAskedStatus } from './question';
 import validateAnswer from './validateAnswer';
-import { submitResult, createResultForm } from './submitResult';
+import createResultForm from './submitResult';
 import answers from './testAnswers';
-import { renderLeaderboard } from './testLeaderboard';
+import renderLeaderboard from './testLeaderboard';
 import announcementBox from './announcementBox';
-import { getLeaderboard } from '../firebase/firestore';
+import { getLeaderboard, addToLeaderboard } from '../firebase/firestore';
 
 const App = async () => {
     loadImage();
@@ -49,8 +49,10 @@ const App = async () => {
                 const form = document.querySelector('form');
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    submitResult(numOfMistakesCopy);
-                    renderLeaderboard();
+                    const name = document.querySelector('#name').value;
+                    addToLeaderboard(name, numOfMistakesCopy);
+                    leaderboard.push({ name, result: numOfMistakesCopy });
+                    renderLeaderboard(leaderboard);
                     questionId = loadQuestion();
                     e.target.remove();
                 });
