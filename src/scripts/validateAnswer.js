@@ -1,4 +1,6 @@
 const validateAnswer = (correctAnswer, submittedAnswer) => {
+    console.log(correctAnswer);
+    console.log(submittedAnswer);
     if (submittedAnswer.length !== correctAnswer.length) {
         return false;
     }

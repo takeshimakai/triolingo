@@ -3,11 +3,10 @@ import { loadImage, loadTagAreas } from './init';
 import { getSelected, clearSelected, addToSelected, showClicked, removeAllCircles } from './tag';
 import { loadQuestion, allQuestionsAsked, resetAskedStatus } from './question';
 import validateAnswer from './validateAnswer';
-import createResultForm from './submitResult';
-import answers from './testAnswers';
-import renderLeaderboard from './testLeaderboard';
+import createResultForm from './createResultForm';
+import renderLeaderboard from './renderLeaderboard';
 import announcementBox from './announcementBox';
-import { getLeaderboard, addToLeaderboard } from '../firebase/firestore';
+import { getLeaderboard, addToLeaderboard, getAnswer } from '../firebase/firestore';
 
 const App = async () => {
     loadImage();
@@ -29,11 +28,8 @@ const App = async () => {
     });
 
     const answerBtn = document.querySelector('#answer-btn');
-    answerBtn.addEventListener('click', () => {
-        // Replace below line with backend
-        const { answer } = answers.find(({ id }) => id === questionId);
-
-        const answerIsCorrect = validateAnswer(answer, getSelected());
+    answerBtn.addEventListener('click', async () => {
+        const answerIsCorrect = validateAnswer(await getAnswer(questionId), getSelected());
 
         if (answerIsCorrect) {
             removeAllCircles();
