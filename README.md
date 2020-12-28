@@ -1,2 +1,6 @@
 # The Odin Project
-Photo Tagging App
+Javascript and the Backend Practice Project
+
+## Triolingo
+Mock language learning app
+
