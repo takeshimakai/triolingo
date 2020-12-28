@@ -20,18 +20,19 @@ const renderLeaderboard = (leaderboard) => {
     const leaderboardContent = document.querySelector('#leaderboard-content');
     leaderboardContent.innerHTML = '';
 
-    leaderboard.forEach((leader) => {
+    // Only render top 8
+    for (let i = 0; i < leaderboard.length && i < 8; i++) {
         const leaderContainer = document.createElement('div');
         leaderContainer.classList.add('leader-container');
         leaderboardContent.appendChild(leaderContainer);
 
-        Object.keys(leader).forEach((key) => {
+        Object.keys(leaderboard[i]).forEach((key) => {
             const element = document.createElement('p');
             element.classList.add(key);
-            element.textContent = `${key[0].toUpperCase() + key.substring(1)}: ${leader[key]}`;
+            element.textContent = `${key[0].toUpperCase() + key.substring(1)}: ${leaderboard[i][key]}`;
             leaderContainer.appendChild(element);
         });
-    });
+    }
 };
 
 export default renderLeaderboard;
