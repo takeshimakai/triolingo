@@ -12,7 +12,13 @@ const getLeaderboard = async () => {
     return leaderboard;
 };
 
-const addToLeaderboard = (name, result) => collectionRef('leaderboard').add({ name, result });
+const addToLeaderboard = async (name, result) => {
+    try {
+        await collectionRef('leaderboard').add({ name, result });
+    } catch (e) {
+        logError(e)
+    }
+}
 
 const getAnswer = (questionId) => collectionRef('answers').doc(questionId).get().then((doc) => doc.data().answer);
 

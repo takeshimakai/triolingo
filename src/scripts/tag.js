@@ -8,10 +8,13 @@ const clearSelected = () => {
 
 const addToSelected = (e) => {
     const index = selected.findIndex((element) => element === e.target.id);
+
     if (index === -1) {
-        selected.push(e.target.id);
+        // selected.push(e.target.id);
+        selected = [...selected, e.target.id]
     } else {
-        selected.splice(index, 1);
+        // selected.splice(index, 1);
+        selected = selected.slice(index, 1)
     }
 };
 
